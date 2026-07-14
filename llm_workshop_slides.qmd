@@ -65,7 +65,7 @@ Large language models can **annotate text at scale** — coding thousands of man
 :::
 
 ::: {.notes}
-Having set up the general stakes and the specific pivot, now name the appeal directly — this isn't a talk arguing LLMs are bad for research. It's a talk about what "replication" even means once your coder is a model you don't fully control, and how to check whether your own pipeline is trustworthy before you build a paper on it. Everything from here is either a finding from one of the two papers, or (clearly marked) our own synthesis.
+Having set up the general stakes and the specific pivot, now name the appeal directly — this isn't a talk arguing LLMs are bad for research. It's a talk about what "replication" even means once your coder is a model you don't fully control, and how to check whether your own pipeline is trustworthy before you build a paper on it. Everything from here is either a finding from one of the two papers, or (clearly marked) our own synthesis. Bridge to the next two slides out loud: "This talk draws on two papers that take this problem seriously — let me show you both before I pull a single number out of them."
 :::
 
 ---
@@ -79,7 +79,7 @@ Forthcoming in *Political Science Research and Methods*.
 :::
 
 ::: {.notes}
-Note the title page prints no author names on Paper 1 itself — the attribution used throughout this talk (Barrie, Palaiologou & Törnberg) comes from Paper 2's own bibliography, not from this page. Read a line or two of the abstract aloud if useful: the core claims (stability is necessary but not sufficient; ~3.1M annotations; six datasets, twelve outcomes) are all here in the paper's own words.
+Note the title page prints no author names on Paper 1 itself — the attribution used throughout this talk (Barrie, Palaiologou & Törnberg) comes from Paper 2's own bibliography, not from this page. Read a line or two of the abstract aloud if useful: the core claims (stability is necessary but not sufficient; ~3.1M annotations; six datasets, twelve outcomes) are all here in the paper's own words. That's the diagnostic — here's the audit.
 :::
 
 ---
@@ -106,16 +106,16 @@ Two companion papers, both asking whether LLM-based annotation can be trusted to
 - **Paper 1** (Barrie, Palaiologou & Törnberg): a diagnostic **tool** — can you tell, cheaply, whether a pipeline is fragile? [@barrie2024promptstability]
 - **Paper 2** (Barrie, Palmer & Spirling): an empirical **audit** — repeated LLM replications over a year, tracking what actually breaks [@barrie2024replication]
 - **Shared logic**: both repurpose human inter-coder reliability approaches for a new kind of "rater" — the LLM
-- **This talk**: the diagnostic's mechanics, the empirical evidence, a synthesis — then how to run the diagnostic yourself
+- **This talk**: where LLMs sit in replication's landscape, the diagnostic's mechanics, the empirical evidence, a synthesis — then how to run the diagnostic yourself
 :::
 
 ::: {.notes}
-Christopher Barrie is a co-author on both papers — Paper 2 explicitly cites Paper 1's tool as one of its own recommendations, with the caveat that a stability check alone doesn't solve the deeper closed-model replication problem. Frame this as "same worry, two angles": one gives you a pre-flight check you can run on your own pipeline; the other tells you, empirically and at scale, how bad things get if you skip it.
+Christopher Barrie is a co-author on both papers — Paper 2 explicitly cites Paper 1's tool as one of its own recommendations, with the caveat that a stability check alone doesn't solve the deeper closed-model replication problem. Frame this as "same worry, two angles": one gives you a pre-flight check you can run on your own pipeline; the other tells you, empirically and at scale, how bad things get if you skip it. Before either paper's specific findings, one piece of shared scaffolding: what did "replication" even mean before LLMs showed up? That's the next slide.
 :::
 
 ---
 
-## LLMs Don't Fit Any Existing Replication Category {.smaller}
+## LLMs Don't Fit Any Existing Replication Category
 
 Paper 2's Table 1 places replication practices on two axes — and shows where proprietary LLMs land, alone, in the worst quadrant [@barrie2024replication]:
 
@@ -162,7 +162,7 @@ Paper 1's trick: treat repeated LLM runs — or reworded prompts — **as if the
 :::
 
 ::: {.notes}
-The elegant move here is purely conceptual: nothing about Krippendorff's alpha cares whether the "raters" are humans, repeated LLM calls, or reworded prompts sent to the same LLM. Paper 1 just points the same reliability statistic at a new kind of rater. Intra-PSS and inter-PSS are the identical computation with a different definition of "rater" — the same package, and the same `bootstrap_krippendorff` routine, computes both. One detail worth mentioning if asked: the distance function inside alpha matches the outcome type — nominal (simple mismatch) for categorical labels, interval (squared difference) for ordinal scales like the 10-point ideology score. Next two slides show what this looks like empirically.
+The elegant move here is purely conceptual: nothing about Krippendorff's alpha cares whether the "raters" are humans, repeated LLM calls, or reworded prompts sent to the same LLM. Paper 1 just points the same reliability statistic at a new kind of rater. Intra-PSS and inter-PSS are the identical computation with a different definition of "rater" — the same package, and the same `bootstrap_krippendorff` routine, computes both. One detail worth mentioning if asked: the distance function inside alpha matches the outcome type — nominal (simple mismatch) for categorical labels, interval (squared difference) for ordinal scales like the 10-point ideology score. Let's not stay abstract — the next three slides show what this looks like empirically, starting with one concrete person.
 :::
 
 ---
@@ -208,14 +208,14 @@ Same outcome (MII, Long), same statistic — now the prompt is paraphrased at in
 ![Paper 1, Figure 2 (inter-PSS), MII (Long) [@barrie2024promptstability]](figures/paper1_fig2_inter_mii_long.png){height="520px" fig-alt="Line chart of inter-prompt stability for MII (Long) swinging between about 0.85 and 0.05 as paraphraser temperature rises from 0 to 5, averaging 0.44"}
 
 ::: {.notes}
-Same prompt reworded at increasing paraphraser "temperature" (x-axis 0-5) — oscillates wildly, dropping as low as 0.05, averaging 0.44. The paper's own worked examples: for some outcomes (like MII) this instability turned out to be a formatting/parsing artifact; for others (like Synthetic Short) it persisted even after cleaning, because the task itself lacked enough signal. Same symptom, different causes — that diagnostic distinction is exactly what running your own inter-PSS check on a new task will surface.
+Same prompt reworded at increasing paraphraser "temperature" (x-axis 0-5) — oscillates wildly, dropping as low as 0.05, averaging 0.44. The paper's own worked examples: for some outcomes (like MII) this instability turned out to be a formatting/parsing artifact; for others (like Synthetic Short) it persisted even after cleaning, because the task itself lacked enough signal. Same symptom, different causes — that diagnostic distinction is exactly what running your own inter-PSS check on a new task will surface. Paper 1 has made its case: prompt wording alone can break things. Paper 2 now turns to a different axis of fragility entirely — not wording, but which model, and which version.
 :::
 
 ---
 
 ## Finding 2: Model & Version Choice Changes Accuracy *and* Variance
 
-Paper 2 compared crowdworkers, GPT, Gemini, and Llama on the same manifesto task, across eleven monthly iterations [@barrie2024replication].
+Wording is one axis of fragility. Paper 2 tests another: crowdworkers, GPT, Gemini, and Llama on the same manifesto task, across eleven monthly iterations [@barrie2024replication].
 
 ::: {.fragment}
 ![Paper 2, Figure 1, Panels A–B ("Manifestos, static") [@barrie2024replication]](figures/paper2_fig1_manifestos_accuracy_variance.png){height="460px" fig-alt="Two dot plots: left shows F1 accuracy across runs by coder (Llama, OpenAI, Crowd, Gemini) for Ideology score and Economic vs Social outcomes; right shows run-to-run variability (SD of F1) for the same coders and outcomes, with Gemini clearly the most variable"}
@@ -242,14 +242,14 @@ The intuitive fix for instability is "set temperature to 0." Paper 2 tested this
 :::
 
 ::: {.notes}
-This slide often surprises people who've internalized "temperature 0 = deterministic" from general ML folklore. The density plot shows run-to-run correlations bunched near 1.0 but with real mass down around 0.83-0.87 — and the triangular matrix below it (Run 1 through Run 20) visibly has lighter, lower-correlation cells scattered throughout rather than being solid black. It's true for a model you run yourself with a pinned version — it is not guaranteed true for a vendor API, even when the vendor exposes a temperature parameter at all (some current model families don't let you change it anymore).
+This slide often surprises people who've internalized "temperature 0 = deterministic" from general ML folklore. The density plot shows run-to-run correlations bunched near 1.0 but with real mass down around 0.83-0.87 — and the triangular matrix below it (Run 1 through Run 20) visibly has lighter, lower-correlation cells scattered throughout rather than being solid black. It's true for a model you run yourself with a pinned version — it is not guaranteed true for a vendor API, even when the vendor exposes a temperature parameter at all (some current model families don't let you change it anymore). Everything so far has been about whether labels themselves are stable. The next slide asks the harder question: does any of it change the substantive conclusion a paper draws?
 :::
 
 ---
 
 ## Finding 4: Annotation Choices Flip Downstream Conclusions
 
-Paper 2 re-coded Hopkins et al.'s ~6.6k identity-cued headlines with three OpenAI models, then re-ran the original regressions [@barrie2024replication].
+So far, every finding has been about label reliability. Does any of it change the conclusions a paper actually draws? Paper 2 re-coded Hopkins et al.'s ~6.6k identity-cued headlines with three OpenAI models, then re-ran the original regressions [@barrie2024replication].
 
 ::: {.fragment}
 ![Paper 2, Figure 5, Panel C (P-values, original vs. re-estimated) [@barrie2024replication]](figures/paper2_fig5_identity_panelC_pvalues.png){height="240px" fig-alt="Dot plot of p-values for the Gender and Race coefficients across three OpenAI models and three regression specifications; Gender p-values cluster near zero (significant) while the original (dashed line) sits well above 0.05; Race p-values are mostly above 0.05 (red, not significant) while the original sits near the significance threshold"}
@@ -286,7 +286,7 @@ This five-step list is our synthesis, but it's not invented from nothing — Pap
 
 ---
 
-## A Field-Wide Checklist {.smaller}
+## A Field-Wide Checklist
 
 [![Feuerriegel, Barrie, Crockett, et al. (2026), "A reporting checklist for large language models in behavioural science," *Nature Human Behaviour* [@feuerriegel2026checklist]. Click to open the article.](figures/nature_checklist_article.png){height="520px" fig-alt="Nature Human Behaviour comment article, 'A reporting checklist for large language models in behavioural science,' by Stefan Feuerriegel, Christopher Barrie, and many co-authors, published 9 June 2026"}](https://www.nature.com/articles/s41562-026-02492-7)
 
@@ -315,7 +315,7 @@ Bridge slide from the empirical talk into the tool itself. This is the real, act
 
 ---
 
-## Appendix: Inside the `promptstability` Package {.smaller}
+## Appendix: Inside the `promptstability` Package
 
 ::: {.methodbox}
 The package that computes every PSS number in this talk. This appendix walks through installing it, its core API, and a real example run.
@@ -327,7 +327,7 @@ Appendix section — optional material for after the talk or a workshop follow-u
 
 ---
 
-## Appendix: Running Intra- and Inter-PSS {.smaller}
+## Appendix: Running Intra- and Inter-PSS
 
 A minimal example — any function that takes `(text, prompt)` and returns a label works as the annotation function, whether it calls OpenAI or a local Ollama model:
 
@@ -355,7 +355,7 @@ ka_inter, _ = psa.manual_inter_pss("prompt_variants.csv")
 
 ---
 
-## Appendix: Real Output From the Package {.smaller}
+## Appendix: Real Output From the Package
 
 ::: {.fragment}
 ![](figures/module1_inter_pss_plot.png){height="500px" fig-alt="Line chart of inter-prompt stability across six rewording temperatures, bouncing between roughly 0.3 and 1.0 rather than declining smoothly"}
@@ -367,7 +367,7 @@ Genuine output from a small open-weight model running on ordinary hardware, usin
 
 ---
 
-## Appendix: API Surface {.smaller}
+## Appendix: API Surface
 
 ::: {.incremental}
 - **`PromptStabilityAnalysis(annotation_function, data, parse_function=)`** — wraps any annotation function (OpenAI, Ollama, local models) as a PSS-ready analysis object
