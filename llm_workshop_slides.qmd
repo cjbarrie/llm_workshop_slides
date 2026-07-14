@@ -40,7 +40,11 @@ Open by acknowledging the appeal directly — this isn't a talk arguing LLMs are
 
 ## Paper 1
 
-![Title page and abstract, Paper 1 [@barrie2024promptstability]](figures/paper_promptstability_titlepage.png){height="620px" fig-alt="Title page of Prompt Stability Scoring for Text Annotation with Large Language Models, showing the abstract describing the Prompt Stability Score and the promptstability package"}
+![Title page and abstract, Paper 1 [@barrie2024promptstability]](figures/paper_promptstability_titlepage.png){height="580px" fig-alt="Title page of Prompt Stability Scoring for Text Annotation with Large Language Models, showing the abstract describing the Prompt Stability Score and the promptstability package"}
+
+::: {.note style="text-align:center;"}
+Forthcoming in *Political Science Research and Methods*.
+:::
 
 ::: {.notes}
 Note the title page prints no author names on Paper 1 itself — the attribution used throughout this talk (Barrie, Palaiologou & Törnberg) comes from Paper 2's own bibliography, not from this page. Read a line or two of the abstract aloud if useful: the core claims (stability is necessary but not sufficient; ~3.1M annotations; six datasets, twelve outcomes) are all here in the paper's own words.
@@ -50,7 +54,11 @@ Note the title page prints no author names on Paper 1 itself — the attribution
 
 ## Paper 2
 
-![Title page and abstract, Paper 2 [@barrie2024replication]](figures/paper_replication_titlepage.png){height="620px" fig-alt="Title page of Replication for Large Language Models: Problems, Principles, and Best Practices for Political Science, showing the abstract describing the rolling iterated replication design"}
+![Title page and abstract, Paper 2 [@barrie2024replication]](figures/paper_replication_titlepage.png){height="580px" fig-alt="Title page of Replication for Large Language Models: Problems, Principles, and Best Practices for Political Science, showing the abstract describing the rolling iterated replication design"}
+
+::: {.note style="text-align:center;"}
+Forthcoming in the *American Journal of Political Science*.
+:::
 
 ::: {.notes}
 Point out the abstract's own framing: "LLMs can be accurate, but the observed variance in performance is often unacceptably high. Strict temperature control does not resolve these issues." That sentence previews Findings 2 and 3 almost exactly — worth flagging before we get there.
