@@ -220,7 +220,17 @@ with open(SRC, encoding="utf-8") as f:
 if "id=\"annotated-layout\"" in html:
     raise SystemExit(f"{SRC} already looks annotated — check the source file")
 
-html = html.replace("</body></html>", INJECTION + "</body></html>")
+# Insert only at the TRUE end of the document. A naive html.replace() here is
+# unsafe: self-contained Quarto/reveal.js exports can bundle third-party JS
+# (e.g. Mermaid's SVG-export code) that contains the literal string
+# "</body></html>" inside its own JS string literals, earlier in the file.
+# replace() would corrupt that library's syntax and break the whole page.
+# rfind() anchors to the actual last occurrence instead.
+marker = "</body></html>"
+idx = html.rfind(marker)
+if idx == -1:
+    raise SystemExit(f"{SRC}: couldn't find the closing {marker!r} to inject before")
+html = html[:idx] + INJECTION + html[idx:]
 
 with open(OUT, "w", encoding="utf-8") as f:
     f.write(html)
