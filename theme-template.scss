@@ -638,13 +638,16 @@ $selection-bg: $slate !default;
 // The logo (NYU branding) appears ONLY on the title slide, not throughout
 // the deck. It's a fixed-position element that Quarto/reveal.js render as a
 // sibling of .slides, so it's hidden by default and shown only while
-// #title-slide is the active (.present) slide.
+// #title-slide is the active (.present) slide. Positioned top-left rather
+// than bottom-left so it doesn't collide with reveal.js's menu button
+// (fixed at left: 8px; bottom: 8px).
 
 .slide-logo {
   display: none !important;
   position: fixed !important;
-  bottom: 0 !important;
-  left: 10px !important;
+  top: 20px !important;
+  bottom: auto !important;
+  left: 20px !important;
   max-width: 150px;
   max-height: 50px;
   width: auto !important;
