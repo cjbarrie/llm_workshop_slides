@@ -20,6 +20,38 @@ bibliography: references.bib
 suppress-bibliography: false
 ---
 
+## Why Do So Many Studies Fail to Replicate?
+
+![Van Bavel, "Why Do So Many Studies Fail to Replicate?" *The New York Times*, Gray Matter, 27 May 2016.](figures/nyt_replication_crisis.png){height="560px" fig-alt="New York Times Gray Matter opinion piece by Jay Van Bavel, headlined 'Why Do So Many Studies Fail to Replicate?', published 27 May 2016"}
+
+::: {.fragment}
+In 2015, the Open Science Collaboration tried to replicate 100 published psychology studies. **About one in three reproduced the original result** [@opensciencecollaboration2015].
+:::
+
+::: {.notes}
+This is a decades-old, field-wide, well-documented problem — not something specific to LLMs, and not something this talk is inventing. Give the OSC number a beat to land: roughly two in three of these studies did NOT reproduce. Political science, economics, and biomedicine have all had their own versions of this reckoning. The point of opening here is to establish that "does this replicate?" is a serious, general question in science before narrowing to the much newer, much less examined question this talk actually asks.
+:::
+
+---
+
+## A New Kind of Coder, a New Kind of Fragility
+
+The classic replication crisis was about p-hacking, small samples, and publication bias. LLM-based research has a different, newer problem.
+
+::: {.quotebox}
+LLMs "at first appear to enable replication as the discipline commonly understands it — yet in practice they frequently fall short." [@barrie2024replication]
+:::
+
+::: {.fragment}
+Unlike a fixed dataset or a pinned software version, a **proprietary model itself can simply cease to exist** — deprecated, updated, or retired out from under you, with no guarantee the old version is archived anywhere.
+:::
+
+::: {.notes}
+Pivot slide. The quote is verbatim from Paper 2's introduction (p. 3). Make the contrast explicit: the 2010s replication crisis was fundamentally about researcher degrees of freedom and incentives — you could in principle always re-run the analysis, the problem was whether people did it honestly. The LLM case is structurally different: even a fully honest, pre-registered researcher can lose the ability to re-run their own analysis because the infrastructure underneath it disappears. That's the new problem this talk is about.
+:::
+
+---
+
 ## The Promise {background-color="white"}
 
 ::: {.keybox}
@@ -33,7 +65,7 @@ Large language models can **annotate text at scale** — coding thousands of man
 :::
 
 ::: {.notes}
-Open by acknowledging the appeal directly — this isn't a talk arguing LLMs are bad for research. It's a talk about what "replication" even means once your coder is a model you don't fully control, and how to check whether your own pipeline is trustworthy before you build a paper on it. Everything from here is either a finding from one of the two papers, or (clearly marked) our own synthesis.
+Having set up the general stakes and the specific pivot, now name the appeal directly — this isn't a talk arguing LLMs are bad for research. It's a talk about what "replication" even means once your coder is a model you don't fully control, and how to check whether your own pipeline is trustworthy before you build a paper on it. Everything from here is either a finding from one of the two papers, or (clearly marked) our own synthesis.
 :::
 
 ---
@@ -83,46 +115,35 @@ Christopher Barrie is a co-author on both papers — Paper 2 explicitly cites Pa
 
 ---
 
-## Three Traditions of Replication
+## LLMs Don't Fit Any Existing Replication Category {.smaller}
 
-Political science already has three visions of what "replication" means [@barrie2024replication]:
+Paper 2's Table 1 places replication practices on two axes — and shows where proprietary LLMs land, alone, in the worst quadrant [@barrie2024replication]:
 
-:::::: {.columns}
-
-::: {.column width="32%"}
 ::: {.fragment}
-**Deterministic**
-
-Same data + code → identical results. *Exact*, but fragile — depends on system version.
+```{=html}
+<div style="text-align:center; font-weight:600; color:#46586b; margin-bottom:0.3em;">Exact replication possible?</div>
+<div style="display:grid; grid-template-columns: 190px 1fr 1fr; gap:6px; max-width: 980px; margin: 0 auto; font-size:0.88em;">
+<div style="font-style:italic; font-size:0.85em; color:#666; display:flex; align-items:center;">Robust / system-independent?</div>
+<div style="text-align:center; font-weight:600; padding:0.3em;">No</div>
+<div style="text-align:center; font-weight:600; padding:0.3em;">Yes</div>
+<div style="font-weight:600; display:flex; align-items:center; justify-content:center;">No</div>
+<div style="border:2px solid #1c1c1e; background:rgba(28,28,30,0.06); border-radius:6px; padding:0.7em; text-align:center;"><strong>(Proprietary)<br>Large Language Models</strong></div>
+<div style="border:1px solid #ccc; border-radius:6px; padding:0.7em; text-align:center;"><strong>Deterministic Replication</strong><br>static code, static data<br><em>e.g. King (1995)</em></div>
+<div style="font-weight:600; display:flex; align-items:center; justify-content:center;">Yes</div>
+<div style="border:1px solid #ccc; border-radius:6px; padding:0.7em; text-align:center;"><strong>Stochastic Replication</strong><br>crowdsourcing, undergrad RAs<br><em>e.g. Benoit et al. (2016)</em></div>
+<div style="border:1px solid #ccc; border-radius:6px; padding:0.7em; text-align:center;"><strong>Simple, Rule-Based</strong><br>expert agreed standard<br><em>e.g. Bateman et al. (2015)</em></div>
+</div>
+```
 :::
-:::
-
-::: {.column width="32%"}
-::: {.fragment}
-**Stochastic**
-
-Independent re-annotation converges statistically. Not exact, but *robust* to who codes.
-:::
-:::
-
-::: {.column width="32%"}
-::: {.fragment}
-**Rule-based**
-
-A fully explicit coding rule (e.g. Key's 1949 "the South"). Exact *and* robust.
-:::
-:::
-
-::::::
 
 ::: {.fragment}
 ::: {.resultbox}
-**The core problem:** LLM-based annotation exhibits the *weaknesses* of all three traditions — without the *strengths* of any of them [@barrie2024replication].
+**"The central problem with replication for LLMs is that the process exhibits the weaknesses of deterministic, stochastic and rule-based replication, without the strengths of any of them."** [@barrie2024replication]
 :::
 :::
 
 ::: {.notes}
-This is Paper 2's central typology (their Table 1). Reveal the three traditions one at a time, letting each land before moving on, then the punchline: LLMs are not exactly reproducible (unlike deterministic code), not obviously system-independent (unlike stochastic crowd designs), and not reducible to a fully explicit rule (unlike Key's "the South"). The next slide gives the statistical mechanics of Paper 1's diagnostic tool; the four after that are the empirical evidence, one fragility axis at a time, each with the paper's own real figures.
+This is a faithful reconstruction of Paper 2's actual Table 1 (p. 12, Section 3.2) — a 2×2 grid, not a three-column comparison. Columns: can you get back exactly the same result? Rows: is the process robust to who runs it / what system they run it on? Deterministic replication (static code and data, e.g. King 1995) is exact but fragile to system version. Stochastic replication (crowdsourcing) is robust to who does it but not exact. Simple rule-based coding (an explicit rule like Key's 1949 "the South") is both. Proprietary LLMs sit alone in the top-left — neither exact nor robust — which is exactly the quote below, verbatim from the paper (p. 11). The next slide gives the statistical mechanics of Paper 1's diagnostic tool; the four after that are the empirical evidence, one fragility axis at a time, each with the paper's own real figures.
 :::
 
 ---
@@ -146,7 +167,29 @@ The elegant move here is purely conceptual: nothing about Krippendorff's alpha c
 
 ---
 
-## Finding 1: Prompt Wording Changes the Labels
+## Finding 1: One Voter, Three Nearly Identical Prompts
+
+::: {.softbox}
+The task: guess how one real voter voted, from minimal biographical information [@barrie2024promptstability].
+:::
+
+::: {.quotebox}
+Racially, I am Native American. I like to discuss politics with my family and friends. I do not attend church. I am 59 years old. I am a man. I am very interested in politics.
+:::
+
+::: {.fragment}
+1. **Original prompt** — "...I want you to tell me how you think they voted. [Respond 0 for Biden, or 1 for Trump...]" → **Output: 1**
+2. **Reworded, trivially** — "I want you to tell me how you voted in the election. [Respond 0 for Biden, or 1 for Trump...]" → **Output: 0**
+3. **Reworded, trivially, again** — "I want you to tell me how you voted. [Respond 0 for Biden, or 1 for Trump...]" → **Output: 1**
+:::
+
+::: {.notes}
+This is Paper 1's real "Synthetic (Short)" worked example (pp. 21–22), transcribed verbatim — not a recreation. Same voter, same underlying task; the three prompts differ only in incidental wording, with no change to the substantive instruction. The model's answer flips 1 → 0 → 1. The paper's own diagnosis: this isn't a formatting bug or a capability failure — the task is simply underspecified relative to the tiny amount of information given, so there isn't enough signal in the data for the model to be consistent, no matter how the prompt is worded. One concrete example first; the next two slides show the same phenomenon in aggregate, across 30 runs, using the statistic just described.
+:::
+
+---
+
+## Finding 1, at Scale: Prompt Wording Changes the Labels
 
 Same real outcome ("MII, Long" — UK survey most-important-issue coding), scored with the statistic just described. Same prompt, repeated 30 times:
 
@@ -175,9 +218,14 @@ Same prompt reworded at increasing paraphraser "temperature" (x-axis 0-5) — os
 Paper 2 compared crowdworkers, GPT, Gemini, and Llama on the same manifesto task, across eleven monthly iterations [@barrie2024replication].
 
 ::: {.fragment}
-![Paper 2, Figure 1, Panels A–B ("Manifestos, static") [@barrie2024replication]](figures/paper2_fig1_manifestos_accuracy_variance.png){height="520px" fig-alt="Two dot plots: left shows F1 accuracy across runs by coder (Llama, OpenAI, Crowd, Gemini) for Ideology score and Economic vs Social outcomes; right shows run-to-run variability (SD of F1) for the same coders and outcomes, with Gemini clearly the most variable"}
+![Paper 2, Figure 1, Panels A–B ("Manifestos, static") [@barrie2024replication]](figures/paper2_fig1_manifestos_accuracy_variance.png){height="460px" fig-alt="Two dot plots: left shows F1 accuracy across runs by coder (Llama, OpenAI, Crowd, Gemini) for Ideology score and Economic vs Social outcomes; right shows run-to-run variability (SD of F1) for the same coders and outcomes, with Gemini clearly the most variable"}
 :::
 
+::: {.fragment}
+::: {.softbox}
+Not hypothetical: in February 2026, OpenAI deprecated and removed a popular model, `o1-mini` — mid-study, for someone relying on it [@barrie2024replication].
+:::
+:::
 
 ::: {.notes}
 This is the actual Paper 2 figure, not a recreation. Panel A: no coder wins outright on accuracy — task-dependent. Panel B is the more consistent story: Llama and OpenAI are tight/low-variance across repeated monthly runs; Gemini is visibly the most spread out on both outcomes. And this isn't hypothetical — it happened during Paper 2's actual data collection: a vendor deprecated a model version and forced a tier change mid-study. That's a genuinely new kind of fragility relative to a fixed R script.
@@ -233,7 +281,7 @@ A practical robustness workflow combining both papers' tools:
 :::
 
 ::: {.notes}
-Make explicit that this five-step workflow is our synthesis of the two papers for teaching purposes — it is not a diagram either paper prints. Step 1 comes from Paper 1's PSS Playbook; steps 2, 4, and 5 come from Paper 2's practitioner recommendations; step 3 generalizes Paper 2's own multi-model design (Figure 1) into a check anyone can run. Reveal one step at a time and pause on each.
+This five-step list is our synthesis, but it's not invented from nothing — Paper 2 has its own real "Advice to Practitioners" section (Section 6, pp. 30–32) with five numbered recommendations of its own, and steps 2, 4, and 5 here map closely onto it. Step 1 comes from Paper 1's PSS Playbook (Section 6.1); step 3 generalizes Paper 2's own multi-model design (Figure 1) into a check anyone can run. So this slide condenses two papers' worth of concrete, already-published recommendations into one shared workflow, rather than presenting either paper's list verbatim. Reveal one step at a time and pause on each.
 :::
 
 ---
