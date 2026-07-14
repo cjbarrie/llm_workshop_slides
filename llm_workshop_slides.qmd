@@ -79,7 +79,7 @@ Forthcoming in *Political Science Research and Methods*.
 :::
 
 ::: {.notes}
-Note the title page prints no author names on Paper 1 itself — the attribution used throughout this talk (Barrie, Palaiologou & Törnberg) comes from Paper 2's own bibliography, not from this page. Read a line or two of the abstract aloud if useful: the core claims (stability is necessary but not sufficient; ~3.1M annotations; six datasets, twelve outcomes) are all here in the paper's own words. That's the diagnostic — here's the audit.
+The title page now prints full attribution: Christopher Barrie (NYU Sociology), Elli Palaiologou (independent researcher), and Petter Törnberg (University of Amsterdam) — matching the author order used throughout this talk. Read a line or two of the abstract aloud if useful: the core claims (stability is necessary but not sufficient; ~3.1M annotations; six datasets, twelve outcomes) are all here in the paper's own words. That's the diagnostic — here's the audit.
 :::
 
 ---
