@@ -232,7 +232,7 @@ Make explicit that this five-step workflow is our synthesis of the two papers fo
 
 ## A Field-Wide Checklist {.smaller}
 
-[![Feuerriegel, Barrie, Crockett, et al. (2026), "A reporting checklist for large language models in behavioural science," *Nature Human Behaviour*. Click to open the article.](figures/nature_checklist_article.png){height="520px" fig-alt="Nature Human Behaviour comment article, 'A reporting checklist for large language models in behavioural science,' by Stefan Feuerriegel, Christopher Barrie, and many co-authors, published 9 June 2026"}](https://www.nature.com/articles/s41562-026-02492-7)
+[![Feuerriegel, Barrie, Crockett, et al. (2026), "A reporting checklist for large language models in behavioural science," *Nature Human Behaviour* [@feuerriegel2026checklist]. Click to open the article.](figures/nature_checklist_article.png){height="520px" fig-alt="Nature Human Behaviour comment article, 'A reporting checklist for large language models in behavioural science,' by Stefan Feuerriegel, Christopher Barrie, and many co-authors, published 9 June 2026"}](https://www.nature.com/articles/s41562-026-02492-7)
 
 ::: {.notes}
 Click through to the live article if presenting online. This checklist is the field-level, consensus version of the same instinct behind our five-step workflow on the previous slide: standardize what gets reported (model, version, prompt, decoding settings, validation) so LLM-based behavioural-science findings can actually be checked and replicated. Worth noting Paper 2 itself cites an earlier version of this checklist effort in its own recommendations.
@@ -255,18 +255,6 @@ Both PSS statistics in this talk — intra-PSS, inter-PSS, and the bootstrap con
 
 ::: {.notes}
 Bridge slide from the empirical talk into the tool itself. This is the real, actively maintained package behind Paper 1 — not a teaching simplification. The appendix that follows can be skipped in a time-constrained talk and left for people to read afterward; flag that explicitly if running short on time.
-:::
-
----
-
-## Before You Trust the Labels
-
-::: {.resultbox}
-**If you can't show your LLM annotation pipeline replicates itself, you don't yet know whether it replicates anything else.**
-:::
-
-::: {.notes}
-Closing slide — let this sit for a moment rather than moving straight to references. It ties together all four findings: stability is a precondition, not a guarantee, and it's the one precondition you can actually test cheaply, yourself, before you build a paper on top of an LLM-coded variable.
 :::
 
 ---
