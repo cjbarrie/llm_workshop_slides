@@ -1,22 +1,33 @@
 /*-- scss:defaults --*/
 
 // ==============================================================================
-// NYU COLORS
+// NYU COLORS — TITLE SLIDE ONLY
 // ==============================================================================
 // Official NYU brand palette (nyu.edu/employees/.../nyu-brand-guidelines).
-// Primary Violet is PMS 2597 C. Swap these for a different institution's
-// colors and the rest of the theme adapts automatically.
+// Primary Violet is PMS 2597 C. Used ONLY on #title-slide (background gradient,
+// title/author text, logo) so the rest of the deck reads as a neutral,
+// content-first design rather than an institutionally-branded one throughout.
 
-$primary-violet: #57068C;      // NYU Violet — primary institutional color (headings, accents)
-$deep-violet: #330662;         // NYU Deep Violet — borders, hover states
-$medium-violet: #702B9D;       // NYU Medium Violet 1 — secondary emphasis
-$light-violet-tint: #EEE6F3;   // NYU Light Violet 2 — background tints for title/section slides
-$accent-teal: #009B8A;         // NYU accent — highlight color (markers, alerts), complements violet
+$primary-violet: #57068C;      // NYU Violet — title slide only
+$deep-violet: #330662;         // NYU Deep Violet — title slide only
+$medium-violet: #702B9D;       // NYU Medium Violet 1 — title slide only
+$light-violet-tint: #EEE6F3;   // NYU Light Violet 2 — title slide background gradient only
+
+// ==============================================================================
+// NEUTRAL PALETTE — EVERYTHING ELSE
+// ==============================================================================
+// Every slide after the title uses this palette. Swap $ink/$slate for a
+// different neutral accent and the rest of the theme adapts automatically.
+
+$ink: #1c1c1e;                 // headings & primary text color
+$slate: #46586b;               // single neutral accent — links, list markers, box borders, table rule
+$slate-dark: #2e3a46;          // hover / darker variant of $slate
+$paper-tint: #f2f2f2;          // light neutral background tint for boxes/section gradients
 
 // Semantic color mapping (don't change these names)
-$jet: #404040;                 // NYU Dark Gray — body text
-$accent: $primary-violet;
-$accent2: $medium-violet;
+$jet: #404040;                 // body text
+$accent: $ink;
+$accent2: $slate;
 $right-arrow: "\2192";
 
 // Fonts - use system sans-serif for reliability
@@ -25,7 +36,7 @@ $right-arrow: "\2192";
 $font-family-sans-serif: "Source Sans Pro", "Helvetica Neue", sans-serif !default;
 $presentation-heading-font: "Source Sans Pro", "Helvetica Neue", sans-serif !default;
 
-$presentation-heading-color: $primary-violet !default;
+$presentation-heading-color: $ink !default;
 $presentation-heading-font-weight: 600;
 $presentation-font-size-root: 30px;
 
@@ -35,8 +46,8 @@ $presentation-h2-font-size: 1.4em;
 
 // Colors
 $body-color: $jet !default;
-$link-color: $primary-violet !default;
-$selection-bg: $medium-violet !default;
+$link-color: $slate !default;
+$selection-bg: $slate !default;
 
 
 /*-- scss:rules --*/
@@ -57,11 +68,11 @@ $selection-bg: $medium-violet !default;
 .reveal a {
   line-height: 1.3em;
   text-decoration: none;
-  border-bottom: 1px dotted $medium-violet;
+  border-bottom: 1px dotted $slate;
   transition: border-color 0.2s ease;
 
   &:hover {
-    border-bottom-color: $primary-violet;
+    border-bottom-color: $slate-dark;
   }
 }
 
@@ -78,7 +89,7 @@ $selection-bg: $medium-violet !default;
 }
 
 // ==============================================================================
-// TITLE SLIDE
+// TITLE SLIDE — the only place NYU branding/colors appear
 // ==============================================================================
 
 #title-slide {
@@ -148,16 +159,16 @@ $selection-bg: $medium-violet !default;
 // ==============================================================================
 
 .reveal h2 {
-  color: $primary-violet;
+  color: $ink;
   font-weight: 600;
   font-size: 1.5em;
   margin-bottom: 0.7em;
   padding-bottom: 0.2em;
-  border-bottom: 2px solid rgba($medium-violet, 0.3);
+  border-bottom: 2px solid rgba($slate, 0.3);
 }
 
 .reveal h3 {
-  color: $medium-violet;
+  color: $slate;
   font-style: italic;
   font-weight: 500;
   font-size: 1em;
@@ -166,7 +177,7 @@ $selection-bg: $medium-violet !default;
 }
 
 .reveal h4 {
-  color: $accent-teal;
+  color: $slate-dark;
   font-weight: 600;
   font-size: 0.95em;
   margin-top: 0.8em;
@@ -177,11 +188,13 @@ $selection-bg: $medium-violet !default;
 // COLOR UTILITY CLASSES
 // ==============================================================================
 
-.alert { color: $medium-violet; }
+.alert { color: $slate; }
 
-// Customize these class names for your institution:
+// Opt-in only — NYU brand colors, for deliberate use outside the title slide
+// (e.g. a single highlighted word tying back to the institution). Not applied
+// by any default rule below.
 .nyuviolet { color: $primary-violet; }
-.nyuteal { color: $accent-teal; }
+.nyuteal { color: #009B8A; }
 .nyugray { color: $jet; }
 
 // Semantic colors for diagrams and annotations
@@ -200,9 +213,9 @@ $selection-bg: $medium-violet !default;
 }
 
 // Highlight classes
-.hi { font-weight: 600; color: $primary-violet !important; }
-.hi-gold { font-weight: 600; color: $medium-violet !important; }
-.hi-yellow { font-weight: 600; color: $accent-teal !important; }
+.hi { font-weight: 600; color: $ink !important; }
+.hi-gold { font-weight: 600; color: $slate !important; }
+.hi-yellow { font-weight: 600; color: $slate-dark !important; }
 .hi-slate { font-weight: 600; color: #314f4f !important; }
 .hi-green { font-weight: 600; color: #2E8B57 !important; }
 .hi-red { font-weight: 600; color: #C41E3A !important; }
@@ -232,7 +245,7 @@ $selection-bg: $medium-violet !default;
   }
 
   li::marker {
-    color: $primary-violet;
+    color: $ink;
     font-size: 0.9em;
   }
 }
@@ -251,7 +264,7 @@ $selection-bg: $medium-violet !default;
 
   li:before {
     content: $right-arrow;
-    color: $medium-violet;
+    color: $slate;
     position: absolute;
     left: -1.1em;
     font-size: 0.9em;
@@ -271,7 +284,7 @@ $selection-bg: $medium-violet !default;
   }
 
   li::marker {
-    color: $accent-teal;
+    color: $slate-dark;
     font-weight: 700;
   }
 }
@@ -281,8 +294,8 @@ $selection-bg: $medium-violet !default;
 // ==============================================================================
 
 .keybox {
-  background-color: rgba($medium-violet, 0.10);
-  border-left: 4px solid $medium-violet;
+  background-color: rgba($slate, 0.10);
+  border-left: 4px solid $slate;
   padding: 0.8em 1.2em;
   margin: 1.2em 0;
   border-radius: 6px;
@@ -291,8 +304,8 @@ $selection-bg: $medium-violet !default;
 }
 
 .highlightbox {
-  background-color: rgba($accent-teal, 0.08);
-  border-left: 4px solid $accent-teal;
+  background-color: rgba($slate-dark, 0.08);
+  border-left: 4px solid $slate-dark;
   padding: 0.8em 1.2em;
   margin: 1.2em 0;
   border-radius: 6px;
@@ -301,8 +314,8 @@ $selection-bg: $medium-violet !default;
 }
 
 .methodbox {
-  background-color: rgba($primary-violet, 0.06);
-  border-left: 4px solid $primary-violet;
+  background-color: rgba($ink, 0.05);
+  border-left: 4px solid $ink;
   padding: 0.8em 1.2em;
   margin: 1.2em 0;
   border-radius: 6px;
@@ -311,8 +324,8 @@ $selection-bg: $medium-violet !default;
 }
 
 .assumptionbox {
-  background-color: rgba($medium-violet, 0.08);
-  border: 2px solid $medium-violet;
+  background-color: rgba($slate, 0.08);
+  border: 2px solid $slate;
   padding: 0.8em 1.2em;
   margin: 1.2em 0;
   border-radius: 6px;
@@ -321,8 +334,8 @@ $selection-bg: $medium-violet !default;
 }
 
 .quotebox {
-  background-color: rgba($medium-violet, 0.08);
-  border-left: 4px solid darken($medium-violet, 10%);
+  background-color: rgba($slate, 0.08);
+  border-left: 4px solid darken($slate, 10%);
   padding: 0.8em 1.2em 0.8em 1.8em;
   margin: 1em 0;
   border-radius: 0 6px 6px 0;
@@ -333,7 +346,7 @@ $selection-bg: $medium-violet !default;
   &::before {
     content: "\201C";
     font-size: 2.5em;
-    color: rgba($medium-violet, 0.4);
+    color: rgba($slate, 0.4);
     position: absolute;
     left: 0.15em;
     top: -0.1em;
@@ -343,8 +356,8 @@ $selection-bg: $medium-violet !default;
 }
 
 .resultbox {
-  background-color: rgba($accent-teal, 0.12);
-  border: 2px solid $accent-teal;
+  background-color: rgba($ink, 0.06);
+  border: 2px solid $ink;
   padding: 0.8em 1.2em;
   margin: 1.2em 0;
   border-radius: 6px;
@@ -353,7 +366,7 @@ $selection-bg: $medium-violet !default;
 }
 
 .eqbox {
-  background-color: rgba($primary-violet, 0.04);
+  background-color: rgba($ink, 0.04);
   padding: 0.6em 1.2em;
   margin: 0.8em 0;
   border-radius: 0;
@@ -361,7 +374,7 @@ $selection-bg: $medium-violet !default;
 }
 
 .softbox {
-  background-color: rgba($medium-violet, 0.06);
+  background-color: rgba($slate, 0.06);
   padding: 0.6em 1.2em;
   margin: 0.8em 0;
   border-radius: 0;
@@ -391,12 +404,12 @@ $selection-bg: $medium-violet !default;
 .reveal table thead th,
 .reveal .slides table tr:last-child td,
 .reveal .slides table {
-  border-bottom: 2px solid $primary-violet;
+  border-bottom: 2px solid $ink;
 }
 
 .reveal table thead th {
   font-weight: 600;
-  color: $primary-violet;
+  color: $ink;
 }
 
 .reveal table caption {
@@ -413,7 +426,7 @@ $selection-bg: $medium-violet !default;
 }
 
 .reveal section h1 {
-  color: $primary-violet;
+  color: $ink;
   text-align: center;
   font-size: 2.2em;
   font-weight: 700;
@@ -430,7 +443,7 @@ $selection-bg: $medium-violet !default;
   text-align: center !important;
   top: 0 !important;
   padding: 0 !important;
-  background: linear-gradient(135deg, white 0%, $light-violet-tint 100%);
+  background: linear-gradient(135deg, white 0%, $paper-tint 100%);
 }
 
 .reveal .slides section:has(> h1:only-child),
@@ -441,7 +454,7 @@ $selection-bg: $medium-violet !default;
   align-items: center !important;
   height: 100% !important;
   text-align: center !important;
-  background: linear-gradient(135deg, white 0%, $light-violet-tint 100%);
+  background: linear-gradient(135deg, white 0%, $paper-tint 100%);
 }
 
 // ==============================================================================
@@ -534,7 +547,7 @@ $selection-bg: $medium-violet !default;
 }
 
 .note { font-style: italic; color: #666666; }
-.qa { font-weight: 600; color: $primary-violet; }
+.qa { font-weight: 600; color: $ink; }
 
 // ==============================================================================
 // IMAGES AND FIGURES
@@ -578,8 +591,8 @@ $selection-bg: $medium-violet !default;
 // ==============================================================================
 
 .reveal blockquote {
-  background-color: rgba($primary-violet, 0.04);
-  border-left: 4px solid $medium-violet;
+  background-color: rgba($ink, 0.04);
+  border-left: 4px solid $slate;
   padding: 1em 1.5em;
   margin: 1em 0;
   border-radius: 0 6px 6px 0;
@@ -590,7 +603,7 @@ $selection-bg: $medium-violet !default;
 }
 
 .reveal code {
-  background-color: rgba($primary-violet, 0.06);
+  background-color: rgba($ink, 0.06);
   padding: 0.15em 0.4em;
   border-radius: 3px;
   font-size: 0.85em;
@@ -620,11 +633,15 @@ $selection-bg: $medium-violet !default;
 .references { font-size: 0.5em; line-height: 1.4; }
 
 // ==============================================================================
-// NAVIGATION
+// NAVIGATION / LOGO
 // ==============================================================================
+// The logo (NYU branding) appears ONLY on the title slide, not throughout
+// the deck. It's a fixed-position element that Quarto/reveal.js render as a
+// sibling of .slides, so it's hidden by default and shown only while
+// #title-slide is the active (.present) slide.
 
 .slide-logo {
-  display: block !important;
+  display: none !important;
   position: fixed !important;
   bottom: 0 !important;
   left: 10px !important;
@@ -632,6 +649,10 @@ $selection-bg: $medium-violet !default;
   max-height: 50px;
   width: auto !important;
   color: $body-color !important;
+}
+
+.reveal:has(.slides > section#title-slide.present) .slide-logo {
+  display: block !important;
 }
 
 .slide-number, .reveal.has-logo .slide-number {
@@ -647,6 +668,6 @@ $selection-bg: $medium-violet !default;
 
 .reveal a:focus,
 .reveal button:focus {
-  outline: 2px solid $medium-violet;
+  outline: 2px solid $slate;
   outline-offset: 2px;
 }
